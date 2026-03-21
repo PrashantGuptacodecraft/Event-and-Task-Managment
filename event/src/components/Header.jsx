@@ -1,63 +1,61 @@
 import React from 'react'
+import { useApp } from '../context/AppContext'
 
 const Header = () => {
+  const { user, logout } = useApp()
+
   return (
-    <>
-    <header className="p-3 mb-3 border-bottom">
-  <div className="container">
-    <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-      
-      <a href="/" className="d-flex align-items-center mb-2 mb-lg-0 link-body-emphasis text-decoration-none">
-        <svg className="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
-          <use xlinkHref="#bootstrap"></use>
-        </svg>
-      </a>
+    <header className="header-glass px-3 py-2">
+      <div className="d-flex align-items-center justify-content-between">
 
-      <ul className="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" className="nav-link px-2 link-secondary">Dashboard</a></li>
-        <li><a href="#" className="nav-link px-2 link-body-emphasis">Tasks</a></li>
-        <li><a href="#" className="nav-link px-2 link-body-emphasis">Events</a></li>
-        <li><a href="#" className="nav-link px-2 link-body-emphasis">Hackathons</a></li>
-      </ul>
-
-      <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input
-          type="search"
-          className="form-control"
-          placeholder="Search..."
-          aria-label="Search"
-        />
-      </form>
-
-      <div className="dropdown text-end">
-        <a
-          href="#"
-          className="d-block link-body-emphasis text-decoration-none dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://github.com/mdo.png"
-            alt="mdo"
-            width="32"
-            height="32"
-            className="rounded-circle"
-          />
-        </a>
-
-        <ul className="dropdown-menu text-small">
-          <li><a className="dropdown-item" href="#">New project...</a></li>
-          <li><a className="dropdown-item" href="#">Settings</a></li>
-          <li><a className="dropdown-item" href="#">Profile</a></li>
-          <li><hr className="dropdown-divider" /></li>
-          <li><a className="dropdown-item" href="#">Sign out</a></li>
+        {/* Nav */}
+        <ul className="nav d-none d-md-flex gap-2 mb-0">
+          <li><span className="nav-link header-link">Dashboard</span></li>
+          <li><span className="nav-link header-link">Tasks</span></li>
+          <li><span className="nav-link header-link">Events</span></li>
+          <li><span className="nav-link header-link">Hackathons</span></li>
         </ul>
-      </div>
 
-    </div>
-  </div>
-</header>
-    </>
+        {/* Right */}
+        <div className="d-flex align-items-center gap-2">
+
+          {/* Search */}
+          <input
+            type="search"
+            placeholder="Search..."
+            className="form-control search-box-small"
+          />
+
+          {/* User */}
+          <div className="dropdown">
+            <img
+              src="https://github.com/mdo.png"
+              alt="user"
+              width="32"
+              height="32"
+              className="rounded-circle dropdown-toggle cursor-pointer"
+              data-bs-toggle="dropdown"
+            />
+
+            <ul className="dropdown-menu dropdown-menu-end shadow-sm">
+              <li className="dropdown-item-text fw-bold">
+                {user?.name || "User"}
+              </li>
+              <li><hr className="dropdown-divider" /></li>
+              <li><button className="dropdown-item">Profile</button></li>
+              <li><button className="dropdown-item">Settings</button></li>
+              <li><hr className="dropdown-divider" /></li>
+              <li>
+                <button className="dropdown-item text-danger" onClick={logout}>
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </header>
   )
 }
 

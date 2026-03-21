@@ -1,114 +1,66 @@
 import React from 'react'
+import { useApp } from '../context/AppContext'
 
-const Sidebar = () => {
+const Sidebar = ({ currentPage, setPage }) => {
+  const { user, logout } = useApp()
+
+  const userLinks = [
+    { id: 'dashboard', label: 'Dashboard' },
+    { id: 'tasks', label: 'Tasks' },
+    { id: 'events', label: 'Events' },
+    { id: 'hackathons', label: 'Hackathons' },
+    { id: 'qna', label: 'Q&A' },
+    { id: 'notes', label: 'Notes' },
+    { id: 'profile', label: 'Profile' },
+  ]
+
+  const adminLinks = [
+    { id: 'admin', label: 'Admin Dashboard' },
+    { id: 'events', label: 'Manage Events' },
+    { id: 'hackathons', label: 'Manage Hackathons' },
+  ]
+
+  const links = user?.role === 'admin' ? adminLinks : userLinks
+
   return (
-   <>
-   <div className="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary sidebar" style={{ width: "280px" }}>
-  
-  <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-    <svg className="bi pe-none me-2" width="40" height="32" aria-hidden="true">
-      <use xlinkHref="#bootstrap"></use>
-    </svg>
-    <span className="fs-4"><h1>UniPortal</h1></span>
-  </a>
-
-  <hr />
-
-  <ul className="nav nav-pills flex-column mb-auto">
-    
-    <li className="nav-item">
-      <a href="#" className="nav-link active" aria-current="page">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#home"></use>
-        </svg>
-        Dashboard
-      </a>
-    </li>
-
-    <li>
-      <a href="#" className="nav-link link-body-emphasis">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#speedometer2"></use>
-        </svg>
-        Tasks
-      </a>
-    </li>
-
-    <li>
-      <a href="#" className="nav-link link-body-emphasis">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#table"></use>
-        </svg>
-        Events
-      </a>
-    </li>
-
-    <li>
-      <a href="#" className="nav-link link-body-emphasis">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#grid"></use>
-        </svg>
-      Hackathons
-      </a>
-    </li>
-
-    <li>
-      <a href="#" className="nav-link link-body-emphasis">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#people-circle"></use>
-        </svg>
-        Q&A
-      </a>
-    </li>
-    <li>
-      <a href="#" className="nav-link link-body-emphasis">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#people-circle"></use>
-        </svg>
-        Notes
-      </a>
-    </li>
-    <li>
-      <a href="#" className="nav-link link-body-emphasis">
-        <svg className="bi pe-none me-2" width="16" height="16" aria-hidden="true">
-          <use xlinkHref="#people-circle"></use>
-        </svg>
-        Profile
-      </a>
-    </li>
-
-  </ul>
-
-  <hr />
-
-  <div className="dropdown">
-    <a
-      href="#"
-      className="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle"
-      data-bs-toggle="dropdown"
-      aria-expanded="false"
+    <div
+      className="d-flex flex-column p-3 text-white"
+      style={{
+        width: "260px",
+        height: "100vh",
+        background: "linear-gradient(135deg, #667eea, #764ba2, #ff6a00)",
+        backgroundSize: "300% 300%",
+        animation: "gradientMove 8s ease infinite",
+        backdropFilter: "blur(10px)"
+      }}
     >
-      <img
-        src="https://github.com/mdo.png"
-        alt=""
-        width="32"
-        height="32"
-        className="rounded-circle me-2"
-      />
-      <strong>mdo</strong>
-    </a>
+      {/* Logo */}
+      <h3 className="text-center mb-4 fw-bold">🚀 UniPortal</h3>
 
-    <ul className="dropdown-menu text-small shadow">
-      <li><a className="dropdown-item" href="#">New project...</a></li>
-      <li><a className="dropdown-item" href="#">Settings</a></li>
-      <li><a className="dropdown-item" href="#">Profile</a></li>
-      <li><hr className="dropdown-divider" /></li>
-      <li><a className="dropdown-item" href="#">Sign out</a></li>
-    </ul>
-  </div>
+      <hr style={{ borderColor: "rgba(255,255,255,0.3)" }} />
 
-</div>
-   </>
+      {/* Links */}
+      <div className="d-flex flex-column gap-2 flex-grow-1">
+        {links.map(link => (
+          <button
+            key={link.id}
+            onClick={() => setPage(link.id)}
+            className={`sidebar-btn ${
+              currentPage === link.id ? 'active' : ''
+            }`}
+          >
+            {link.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Logout */}
+      <div className="mt-auto pt-3 border-top" style={{ borderColor: "rgba(255,255,255,0.3)" }}>
+        <button onClick={logout} className="sidebar-btn logout-btn">
+          🚪 Logout
+        </button>
+      </div>
+    </div>
   )
 }
 

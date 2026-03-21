@@ -7,3 +7,87 @@
 .sidebar{
   min-height: 800px;
 }
+
+
+
+/* Animated Gradient Background */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sidebar Buttons */
+.sidebar-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  text-align: left;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+/* Hover Effect */
+.sidebar-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateX(6px);
+}
+
+/* Active Button */
+.sidebar-btn.active {
+  background: white;
+  color: black;
+  font-weight: bold;
+}
+
+/* Logout Button */
+.logout-btn {
+  width: 100%;
+  color: #ffdddd;
+}
+
+.logout-btn:hover {
+  background: #ff4d4d;
+  color: white;
+}
+
+
+/* Header */
+.header-glass {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* Nav links */
+.header-link {
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.header-link:hover {
+  color: #ffd369;
+}
+
+/* Smaller search */
+.search-box-small {
+  width: 140px;   /* 👈 reduced */
+  height: 30px;
+  font-size: 13px;
+  border-radius: 15px;
+  padding: 4px 10px;
+  border: none;
+}
+
+/* Avatar */
+.cursor-pointer {
+  cursor: pointer;
+}
+
+
+
